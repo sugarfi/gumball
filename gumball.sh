@@ -49,6 +49,7 @@ while IFS= read -r add; do
 done <<< "$found"
 shuf "$file" > "tmp"
 cat "tmp" > "$file"
+grep -v "^$url\$" "$file" > "tmp"
+cat "tmp" > "$file"
 rm "tmp"
-sed -i /$url/d "$file"
 echo "$url"
