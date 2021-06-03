@@ -14,10 +14,14 @@ while (( $# )); do
             help
             ;;
         "-f" | "--file")
-            file=shift
+            shift
+            file="$1"
+            shift
             ;;
         "-l" | "--limit")
-            limit=shift
+            shift
+            limit="$1"
+            shift
             ;;
         *)
             >&2 echo "error: unknown flag $1. use -h for help"
@@ -47,9 +51,11 @@ while IFS= read -r add; do
         echo "$add" >> "$file"
     fi
 done <<< "$found"
-shuf "$file" > "tmp"
-cat "tmp" > "$file"
-grep -v "^$url\$" "$file" > "tmp"
-cat "tmp" > "$file"
-rm "tmp"
+
+tmp="$(mktemp)"
+shuf "$file" > "$tmp"
+cat "$tmp" > "$file"
+grep -v "^$url\$" "$file" > "$tmp"
+cat "$tmp" > "$file"
+rm "$tmp"
 echo "$url"
