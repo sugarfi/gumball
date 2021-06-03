@@ -43,7 +43,7 @@ url="$(shuf "$file" | head -n 1)"
 IFS='/' read base <<< "$url"
 found="$(curl -s "$url" | grep -Po '(?<=href=")[^"]*')"
 while IFS= read -r add; do
-    if [[ "$add" =~ ^https?:// ]] && [ "$add" != "$base"* ]; then
+    if [[ "$add" =~ ^https?:// ]]; then
         echo "$add" >> "$file"
     fi
 done <<< "$found"
