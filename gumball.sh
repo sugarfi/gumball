@@ -47,12 +47,12 @@ url="$(shuf "$file" | head -n 1)"
 IFS='/' read base <<< "$url"
 found="$(curl -s "$url" | grep -Po '(?<=href=")[^"]*')"
 while IFS= read -r add; do
-    if [[ "$add" =~ ^https?:// ]] 
-        && ! [[ "$add" =! ^https?://twitter.com ]] 
-        && ! [[ "$add" =! ^https?://instagram.com ]] 
-        && ! [[ "$add" =! ^https?://youtube.com ]] 
-        && ! [[ "$add" =! ^https?://google.com ]] 
-        && ! [[ "$add" =! ^https?://facebook.com ]]; then
+    if [[ "$add" =~ ^https?:// ]] \
+        && ! [[ "$add" =~ ^https?://twitter.com ]] \
+        && ! [[ "$add" =~ ^https?://instagram.com ]] \
+        && ! [[ "$add" =~ ^https?://youtube.com ]] \
+        && ! [[ "$add" =~ ^https?://google.com ]] \
+        && ! [[ "$add" =~ ^https?://facebook.com ]]; then
         echo "$add" >> "$file"
     fi
 done <<< "$found"
