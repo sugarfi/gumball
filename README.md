@@ -32,6 +32,16 @@ to remove all but 300 urls in your file, you can use:
 gumball.sh -l 300
 ```
 
+## other features
+
+gumball automatically blocks boring websites, meaning:
+- twitter
+- instragram
+- facebook
+- youtube
+- google
+you can edit the code if you really want results from these sites.
+
 ## license and bugs and shit
 
 this code is licensed under the [wtfpl](https://wtfpl.net). if you
